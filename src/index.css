@@ -34,6 +34,7 @@ h1 {
 }
 
 .result {
+  margin: 0 auto;
   max-width: 500px;
   display: flex;
   flex-flow: row wrap;
@@ -81,6 +82,13 @@ h1 {
 .input-checkbox {
   width: 20px;
   height: 20px;
+}
+
+.input-text {
+  font-size: 14px;
+  padding-left: 5px;
+  height: 30px;
+  width: 200px;
 }
 
 input::-webkit-outer-spin-button,
@@ -160,6 +168,10 @@ label,
 
 .button:last-child {
   margin-right: 0;
+}
+
+.sent {
+  color: green;
 }
 
 .none {
@@ -250,6 +262,13 @@ hr {
   color: white;
   margin: 20px 0 40px;
   text-decoration: none;
+  font-size: 16px;
+}
+
+button {
+  outline: none;
+  border: 0;
+  cursor: pointer;
 }
 
 .previous {
@@ -273,4 +292,81 @@ hr {
 .pain-scale {
   max-width: 450px;
   margin: 0 auto;
+}
+
+.hidden {
+  display: none;
+}
+
+.spinner {
+  /* margin: 100px auto 0; */
+  width: 70px;
+  text-align: center;
+}
+
+.spinner > div {
+  width: 12px;
+  height: 12px;
+  background-color: #D12E26;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% { 
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% { 
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .title {
+    font-size: 26px;
+  }
+
+  .intro {
+    font-size: 17px;
+  }
+
+  .field-title {
+    font-size: 15px;
+  }
+
+  .field-description {
+    font-size: 14px;
+  }
+
+  .button {
+    font-size: 14px;
+    padding: 7px;
+  }
+
+  .pain-scale {
+    margin: 40px auto;
+  }
+
+  .result {
+    margin: 40px auto;
+  }
 }

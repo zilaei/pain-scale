@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Banner from './components/Banner';
 import Form from './components/Form';
-import Landing from './components/Landing';
 import Results from './components/Results';
 
 class App extends Component {
@@ -87,7 +86,7 @@ class App extends Component {
         <Banner />
         <div className="page-content">
           <Router>
-            <Route exact path="/" component={Landing} />
+            <Route exact path="/" render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler}/>} />
             <Route exact path="/pain-scale" render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler}/>} />
             <Route exact path="/results" render={(props) => <Results {...props} state={this.state}/>} />
           </Router>

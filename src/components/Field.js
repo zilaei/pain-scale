@@ -1,29 +1,30 @@
 import React from 'react';
 
 const activeClass = (dataValue, fieldValue) => {
-  return dataValue == fieldValue ? 'active': '';
+  return dataValue === Number(fieldValue) ? 'active': '';
 }
 
 const renderScale = (scaleNum, buttonHandler, reactKey, fieldValue) => {
-  console.log(fieldValue);
+
+  console.log(Number(fieldValue));
     switch(scaleNum) {
       case 1:
         return (
           <div className="scale-info" data-id={reactKey}>
-            <a className={`button ${activeClass(0, fieldValue)}`} onClick={buttonHandler} data-value="0" href="#">Inte alls=0</a>
-            <a className={`button ${activeClass(1, fieldValue)}`} onClick={buttonHandler} data-value="1" href="#">Sällan=1</a>
-            <a className={`button ${activeClass(2, fieldValue)}`} onClick={buttonHandler} data-value="2" href="#">Ibland=2</a>
-            <a className={`button ${activeClass(3, fieldValue)}`} onClick={buttonHandler} data-value="3" href="#">Ofta=3</a>
+            <a href="# " className={`button ${activeClass(0, fieldValue)}`} onClick={buttonHandler} data-value="0">Inte alls=0</a>
+            <a href="# " className={`button ${activeClass(1, fieldValue)}`} onClick={buttonHandler} data-value="1">Sällan=1</a>
+            <a href="# " className={`button ${activeClass(2, fieldValue)}`} onClick={buttonHandler} data-value="2">Ibland=2</a>
+            <a href="# " className={`button ${activeClass(3, fieldValue)}`} onClick={buttonHandler} data-value="3">Ofta=3</a>
           </div>
         );
       break;
       case 2:
         return (
           <div className="scale-info" data-id={reactKey}>
-            <a className={`button ${activeClass(0, fieldValue)}`} onClick={buttonHandler} data-value="0" href="#">Inte alls=0</a>
-            <a className={`button ${activeClass(1, fieldValue)}`} onClick={buttonHandler} data-value="1" href="#">Lite=1</a>
-            <a className={`button ${activeClass(2, fieldValue)}`} onClick={buttonHandler} data-value="2" href="#">Måttligt=2</a>
-            <a className={`button ${activeClass(3, fieldValue)}`} onClick={buttonHandler} data-value="3" href="#">Mycket=3</a>
+            <a href="# " className={`button ${activeClass(0, fieldValue)}`} onClick={buttonHandler} data-value="0">Inte alls=0</a>
+            <a href="# " className={`button ${activeClass(1, fieldValue)}`} onClick={buttonHandler} data-value="1">Lite=1</a>
+            <a href="# " className={`button ${activeClass(2, fieldValue)}`} onClick={buttonHandler} data-value="2">Måttligt=2</a>
+            <a href="# " className={`button ${activeClass(3, fieldValue)}`} onClick={buttonHandler} data-value="3">Mycket=3</a>
           </div>
         );
       break;
