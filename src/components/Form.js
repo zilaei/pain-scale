@@ -8,11 +8,17 @@ const renderFields = (state, buttonHandler) => {
   })
 }
 
-const Form = ({state, buttonHandler}) => {
+const Form = ({state, buttonHandler, infoHandler}) => {
   return (
     <>
     <div className="pain-scale">
-      <h1 className="title">Bedömning</h1>
+      <div className="top-bar">
+        <h1 className="title">Bedömning</h1>
+        <a href="# " onClick={infoHandler} className="info-link"><i className={`info-icon ${state.infoIconFilled ? 'info-filled' : ''}`}></i></a>
+      </div>
+        <div className={`info-box ${state.hideInfoBox ? 'hidden' : ''}`}>
+          <p>Det här verktyget bygger på den väletablerade modellen Abbey Pain Scale. Du kan läsa mer om verktyget och dess användning <a href="https://www.vardhandboken.se/vard-och-behandling/akut-bedomning-och-skattning/smartskattning-av-akut-och-postoperativ-smarta/smartskattningsinstrument/" target="_blank" rel="noopener noreferrer"> här</a></p>
+        </div>
         <p className="intro">Observera personen och bedöm graden av påverkan med skalan <b>0 till 3</b> i punkt 1 till 6 nedan!</p>
         {renderFields(state, buttonHandler)}
 

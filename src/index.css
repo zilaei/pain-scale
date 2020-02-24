@@ -9,10 +9,6 @@ html, body, #root, .App {
   height: 100%;
 }
 
-.App {
-  padding-left: 32px;
-}
-
 h1 {
   font-size: 24px;
 }
@@ -23,7 +19,7 @@ h1 {
 }
 
 .page-content {
-  padding: 10px 15px 20px 0;
+  padding: 10px 15px 20px 32px;
 }
 
 .field {
@@ -35,7 +31,7 @@ h1 {
 
 .result {
   margin: 0 auto;
-  max-width: 500px;
+  max-width: 450px;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
@@ -102,6 +98,15 @@ input[type=number] {
   -moz-appearance:textfield;
 }
 
+input[type="tel"],
+input[type="email"] {
+  width:200px;
+  font-size: 16px;
+  height: 30px;
+  display: inline-block;
+  margin-left:20px;
+}
+
 .field-title {
   font-size: 13px;
 }
@@ -122,15 +127,21 @@ input[type=number] {
   position: relative;
 }
 
-.checkboxes {
+.checkbox-parent {
   display: flex;
-  flex-flow: row nowrap;
-}
-.checkboxes > div:last-child {
-  padding: 0 15px;
+  flex-flow:row nowrap;
+  margin-bottom:30px;
 }
 
-label,
+.checkboxes {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: space-between;
+  justify-content: space-between;
+  margin-left: 20px;
+}
+
+.input-text,
 .input-checkbox {
   display: block;
   margin: 10px 0;
@@ -284,8 +295,37 @@ button {
   padding: 10px;
 }
 
-.logo {
+.logo-footer {
+  display: inline-block;
+  min-width: 200px;
+  max-width:200px;
+}
+
+footer {
+  background-color: #ededed;
+  padding: 40px;
+  width:100%;
+}
+
+.footer-flex {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.footer-child {
+  padding: 10px;
+  margin: 10px 0;
+  max-width: 400px;
+}
+
+.container {
+  max-width: 450px;
   margin: 0 auto;
+}
+
+.copyright {
   opacity: .5;
 }
 
@@ -296,6 +336,84 @@ button {
 
 .hidden {
   display: none;
+}
+
+.top-bar {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin:20px 0;
+  width:100%;
+}
+
+.settings-icon,
+.info-icon {
+  display: inline-block;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width:100%;
+  height:100%;
+}
+
+.info-icon {
+  background-image: url('/info.svg');
+}
+
+.settings-icon {
+  background-image: url('/settings.svg');
+}
+
+.settings-box,
+.info-box {
+  width:100%;
+  background-color: #ededed;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.info-link {
+  display: inline-block;
+  width:33px;
+  height: 33px;
+}
+
+.settings-link {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  opacity: 1;
+}
+
+.info-icon:hover {
+  background-image: url('/info-filled.svg');
+}
+
+.info-filled {
+  background-image: url('/info-filled.svg');
+}
+
+.settings-content {
+  margin:10px 0;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.settings-content > div {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+}
+
+.settings-content > div > label,
+.settings-content > div > input {
+  display: inline-block;
+  margin: 5px 0;
+}
+
+.settings-content > div:last-child {
+  margin-left: 20px;
 }
 
 .spinner {
@@ -369,4 +487,82 @@ button {
   .result {
     margin: 40px auto;
   }
+}
+
+.checkbox-labels {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+
+.checkbox-container {
+  display: block;
+  position: relative;
+  height:30px;
+  width:30px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.checkbox-container:last-child {
+  margin: 0;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkmark:after {
+  left: 11px;
+  top: 7px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }

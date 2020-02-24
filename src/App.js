@@ -10,6 +10,9 @@ class App extends Component {
     super();
 
     this.state = {
+      infoIconFilled: false,
+      hideInfoBox: true,
+      hideSettingsBox: true,
       painPoints: 0,
       fields: [
         {
@@ -76,8 +79,27 @@ class App extends Component {
       this.setState({
         painPoints: this.state.painPoints + total,
         fields: fieldsCopy
-      }, () => console.log(this.state));
+      });
     }
+  }
+
+  infoHandler = e => {
+    e.preventDefault();
+    e.persist();
+
+    this.setState((state) => ({
+      hideInfoBox: !state.hideInfoBox,
+      infoIconFilled: !state.infoIconFilled
+    }));
+  }
+
+  settingsHandler = e => {
+    e.preventDefault();
+    e.persist();
+
+    this.setState((state) => ({
+      hideSettingsBox: !state.hideSettingsBox,
+    }));
   }
 
   render() {
@@ -86,11 +108,32 @@ class App extends Component {
         <Banner />
         <div className="page-content">
           <Router>
-            <Route exact path="/" render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler}/>} />
-            <Route exact path="/pain-scale" render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler}/>} />
-            <Route exact path="/results" render={(props) => <Results {...props} state={this.state}/>} />
+            <Route exact path="/" render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler} infoHandler={this.infoHandler}/>} />
+            <Route exact path="/pain-scale" render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler} infoHandler={this.infoHandler}/>} />
+            <Route exact path="/results" render={(props) => <Results {...props} state={this.state} settingsHandler={this.settingsHandler}/>} />
           </Router>
         </div>
+        <footer>
+          <div class="container">
+            <div class="footer-flex">
+              <div class="footer-child">
+                <p className="footer-content">
+                  <h3>Kontakt</h3>
+                  <br></br>
+                  <b>Telefon: </b> 042-10 50 00
+                  <br></br>
+                  <b>E-postadress: </b><a href="mailto:kontaktcenter@helsingborg.se">kontaktcenter@helsingborg.se</a>
+                </p>
+              </div>
+              <div class="footer-child">
+                <span className="copyright">App utvecklad av Max Frederiksen, Hbg Works, Helsingborg</span>
+              </div>
+              <div class="footer-child">
+                <img src="/logo-footer.svg" alt="" className="logo-footer"></img>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
     );
   }

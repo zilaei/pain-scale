@@ -1,7 +1,7 @@
-import React, { Component, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Results = ({state}) => {
+const Results = ({ state, settingsHandler }) => {
     const [resultState, setState] = React.useState({
       longLasting: false,
       accute: false,
@@ -24,7 +24,7 @@ const Results = ({state}) => {
       const type = e.target.type;
       const checked = e.target.checked;
 
-      if (type == 'checkbox') {
+      if (type === 'checkbox') {
         setState({
           ...resultState,
           [name]: checked
@@ -60,10 +60,10 @@ const Results = ({state}) => {
         <br></br>
 
         <span><b>Smärtnivå: </b></span>
-        ${resultIndicator(0,2) == 'inactive' ?  '' : '<span>Ingen (0-2)</span>'}
-        ${resultIndicator(3,7) == 'inactive' ?  '' : '<span>Mild (3-7)</span>'}
-        ${resultIndicator(8,13) == 'inactive' ?  '' : '<span>Måttlig (8-13)</span>'}
-        ${resultIndicator(14,18) == 'inactive' ?  '' : '<span>Svår (14-18)</span>'}
+        ${resultIndicator(0,2) === 'inactive' ?  '' : '<span>Ingen (0-2)</span>'}
+        ${resultIndicator(3,7) === 'inactive' ?  '' : '<span>Mild (3-7)</span>'}
+        ${resultIndicator(8,13) === 'inactive' ?  '' : '<span>Måttlig (8-13)</span>'}
+        ${resultIndicator(14,18) === 'inactive' ?  '' : '<span>Svår (14-18)</span>'}
 
         <br></br>
         <br></br>
@@ -97,7 +97,7 @@ const Results = ({state}) => {
       };
 
       window.emailjs.send('gmail', 'template_BxjtD38x', templateParams)
-        .then(response => {
+        .then(() => {
           setState({
             sent: 'Bedömning skickad!',
             spinner: false
@@ -110,7 +110,26 @@ const Results = ({state}) => {
     return (
       <>
         <div className="result">
-          <h3>Resultat</h3>
+        <div className="top-bar">
+          <h1>Resultat</h1>
+          <a href="# " onClick={settingsHandler} className="settings-link"><i className="settings-icon"></i></a>
+        </div>
+        <div className={`settings-box ${state.hideSettingsBox ? 'hidden' : ''}`}>
+          <p>Här kan du välja vem som ska få bedömmningen.</p>
+          <div class="settings-content">
+            <div>
+              <label htmlFor="telephone">Telefon</label>
+              <br></br>
+              <label htmlFor="email">E-postadress</label>
+            </div>
+            <div>
+              <input type="email" name="email"></input>
+              <br></br>
+              <input type="tel" name="telephone"></input>
+            </div>
+          </div>
+          <a href="# " className="close" onClick={settingsHandler}>Klar</a>
+        </div>
           <i className="word-break"></i>
           <p>Dina observation tyder på att personens antagna smärtnivå är:</p>
           <div className="result-content">
@@ -131,20 +150,29 @@ const Results = ({state}) => {
               <br></br>
               <br></br>
 
-              <div className="checkboxes">
-                <div>
+              <div className="checkbox-parent">
+                <div className="checkbox-labels">
                   <label htmlFor="long-lasting">Långvarig</label>
                   <label htmlFor="long-lasting">Akut</label>
                   <label htmlFor="long-lasting">Blandad</label>
                 </div>
-                <div>
-                  <input className="input-checkbox" type="checkbox" name="lasting" checked={resultState.lasting} onChange={handleChange}></input>
-                  <input className="input-checkbox" type="checkbox" name="accute" checked={resultState.accute} onChange={handleChange}></input>
-                  <input className="input-checkbox" type="checkbox" name="mixed" checked={resultState.mixed} onChange={handleChange}></input>
+                <div className="checkboxes">
+                  <label class="checkbox-container">
+                    <input className="input-checkbox" type="checkbox" name="lasting" checked={resultState.lasting} onChange={handleChange}></input>
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="checkbox-container">
+                    <input className="input-checkbox" type="checkbox" name="accute" checked={resultState.accute} onChange={handleChange}></input>
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="checkbox-container">
+                    <input className="input-checkbox" type="checkbox" name="mixed" checked={resultState.mixed} onChange={handleChange}></input>
+                    <span class="checkmark"></span>
+                  </label>
                 </div>
               </div>
 
-              <label htmlFor="patient-name">Namn på patient</label>
+              <label htmlFor="patient-name">Namn på patient / rumsnummer</label>
               <input className="input-text" type="text" name="patientName" value={resultState.patientName} onChange={handleChange}></input>
 
               <label htmlFor="your-name">Ditt namn</label>

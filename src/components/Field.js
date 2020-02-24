@@ -5,8 +5,6 @@ const activeClass = (dataValue, fieldValue) => {
 }
 
 const renderScale = (scaleNum, buttonHandler, reactKey, fieldValue) => {
-
-  console.log(Number(fieldValue));
     switch(scaleNum) {
       case 1:
         return (
@@ -17,7 +15,6 @@ const renderScale = (scaleNum, buttonHandler, reactKey, fieldValue) => {
             <a href="# " className={`button ${activeClass(3, fieldValue)}`} onClick={buttonHandler} data-value="3">Ofta=3</a>
           </div>
         );
-      break;
       case 2:
         return (
           <div className="scale-info" data-id={reactKey}>
@@ -27,7 +24,6 @@ const renderScale = (scaleNum, buttonHandler, reactKey, fieldValue) => {
             <a href="# " className={`button ${activeClass(3, fieldValue)}`} onClick={buttonHandler} data-value="3">Mycket=3</a>
           </div>
         );
-      break;
 
       default:
         return (<></>);
