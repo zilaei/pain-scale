@@ -358,11 +358,11 @@ footer {
 }
 
 .info-icon {
-  background-image: url('/info.svg');
+  background-image: url('./img/info.svg');
 }
 
 .settings-icon {
-  background-image: url('/settings.svg');
+  background-image: url('./img/settings.svg');
 }
 
 .settings-box,
@@ -387,11 +387,11 @@ footer {
 }
 
 .info-icon:hover {
-  background-image: url('/info-filled.svg');
+  background-image: url('./img/info-filled.svg');
 }
 
 .info-filled {
-  background-image: url('/info-filled.svg');
+  background-image: url('./img/info-filled.svg');
 }
 
 .settings-content {

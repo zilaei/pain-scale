@@ -107,7 +107,7 @@ class App extends Component {
       <div className="App">
         <Banner />
         <div className="page-content">
-          <Router>
+          <Router basename="/pain-scale">
             <Route exact path="/" render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler} infoHandler={this.infoHandler}/>} />
             <Route exact path="/pain-scale" render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler} infoHandler={this.infoHandler}/>} />
             <Route exact path="/results" render={(props) => <Results {...props} state={this.state} settingsHandler={this.settingsHandler}/>} />
@@ -129,7 +129,7 @@ class App extends Component {
                 <span className="copyright">App utvecklad av Max Frederiksen, Hbg Works, Helsingborg</span>
               </div>
               <div class="footer-child">
-                <img src="/logo-footer.svg" alt="" className="logo-footer"></img>
+                <img src="./logo-footer.svg" alt="" className="logo-footer"></img>
               </div>
             </div>
           </div>
