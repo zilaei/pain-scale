@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 import history from './history';
 
 import Form from './components/Form';
@@ -143,11 +143,11 @@ class App extends Component {
     return (
       <div className="App">
         <div className="page-content">
-          <Router history={history} basename="/pain-scale">
-            <Route exact path="/" render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler}/>} />
-            <Route exact path="/pain-scale" render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler}/>} />
-            <Route exact path="/results" render={(props) => <Results {...props} state={this.state} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler} />} />
-          </Router>
+          <HashRouter history={history} basename="/pain-scale">
+            <Route exact path={process.env.PUBLIC_URL + '/'} render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler}/>} />
+            <Route exact path={process.env.PUBLIC_URL + '/assessment'} render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler}/>} />
+            <Route exact path={process.env.PUBLIC_URL + '/results'} render={(props) => <Results {...props} state={this.state} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler} />} />
+          </HashRouter>
         </div>
       </div>
     );
