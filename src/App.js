@@ -143,10 +143,10 @@ class App extends Component {
     return (
       <div className="App">
         <div className="page-content">
-          <HashRouter history={history} basename="/pain-scale">
-            <Route exact path={process.env.PUBLIC_URL + '/'} render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler}/>} />
-            <Route exact path={process.env.PUBLIC_URL + '/assessment'} render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler}/>} />
-            <Route exact path={process.env.PUBLIC_URL + '/results'} render={(props) => <Results {...props} state={this.state} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler} />} />
+          <HashRouter history={history} basename="/">
+            <Route exact path="/" render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler}/>} />
+            <Route path="/assessment" render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler}/>} />
+            <Route path="/results" render={(props) => <Results {...props} state={this.state} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler} />} />
           </HashRouter>
         </div>
       </div>

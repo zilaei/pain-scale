@@ -151,7 +151,7 @@ const Results = ({ state, settingsHandler, changeHandler }) => {
                     <div>
                       <div className="bottom-buttons">
                         <div>
-                          <Link to={process.env.PUBLIC_URL + '/assessment'} className="link previous"><i className="arrow-back"></i> Tillbaka till observationen</Link>
+                          <Link to="assessment" className="link previous"><i className="arrow-back"></i> Tillbaka till observationen</Link>
                         </div>
                         <div>
                           <button type="submit" className={`link ${!state.receiverEmailInput ? 'disabled disabled-link' : ''}`}>

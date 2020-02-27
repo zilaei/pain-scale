@@ -26,7 +26,7 @@ const Form = ({state, buttonHandler, settingsHandler, changeHandler}) => {
 
           {renderFields(state, buttonHandler)}
 
-          <Link className={`link link-results ${state.disableShowResults ? 'disabled disabled-link' : ''}`} to={process.env.PUBLIC_URL + '/results'}>Se resultat </Link>
+          <Link className={`link link-results ${state.disableShowResults ? 'disabled disabled-link' : ''}`} to="/results">Se resultat </Link>
           </div>
           <img src="./watermark.svg" alt="Watermark logo" className="watermark"></img>
         </div>
