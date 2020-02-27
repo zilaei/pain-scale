@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import history from './history';
 
 import Form from './components/Form';
@@ -143,11 +143,11 @@ class App extends Component {
     return (
       <div className="App">
         <div className="page-content">
-          <HashRouter history={history} basename="/">
+          <Router history={history} basename={process.env.PUBLIC_URL}>
             <Route exact path="/" render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler}/>} />
             <Route path="/assessment" render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler}/>} />
             <Route path="/results" render={(props) => <Results {...props} state={this.state} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler} />} />
-          </HashRouter>
+          </Router>
         </div>
       </div>
     );
