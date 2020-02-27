@@ -1,40 +1,25 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import history from '../history';
 
-const Results = ({ state, settingsHandler }) => {
-    const [resultState, setState] = React.useState({
-      longLasting: false,
-      accute: false,
-      mixed: false,
-      patientName: '',
-      yourName: '',
+import Navigation from './Navigation'
+
+const Results = ({ state, settingsHandler, changeHandler }) => {
+    const [resultState, setState] = useState({
       sent: '',
+      error: '',
       spinner: false
     })
+
+    useEffect(() => {
+      window.scrollTo(0,0);
+
+      if (state.disableShowResults) history.push('/');
+    }, [])
 
     const resultIndicator = (x, y) => {
       const pP = state.painPoints;
       return pP >= x && pP <= y ? '' : 'inactive';
-    }
-    
-    const handleChange = (e) => {
-      e.persist();
-      const value = e.target.value;
-      const name = e.target.name;
-      const type = e.target.type;
-      const checked = e.target.checked;
-
-      if (type === 'checkbox') {
-        setState({
-          ...resultState,
-          [name]: checked
-        });
-      } else {
-        setState({
-          ...resultState,
-          [name]: value
-        });
-      }
     }
 
     const handleSubmit = e => {
@@ -71,28 +56,28 @@ const Results = ({ state, settingsHandler }) => {
         <span>Typ av smärta</span>
         <ul>
           <li>
-            <b>Långvarig: </b>${resultState.lasting ? 'Ja' : 'Nej'}
+            <b>Långvarig: </b>${state.lasting ? 'Ja' : 'Nej'}
           </li>
           <li>
-            <b>Akut: </b>${resultState.accute ? 'Ja' : 'Nej'}
+            <b>Akut: </b>${state.accute ? 'Ja' : 'Nej'}
           </li>
           <li>
-            <b>Blandad: </b>${resultState.mixed ? 'Ja' : 'Nej'}
+            <b>Blandad: </b>${state.mixed ? 'Ja' : 'Nej'}
           </li>
         </ul>
 
-        <span><b>Namn på patient: </b>${resultState.patientName}</span>
+        <span><b>Namn på patient: </b>${state.patientName}</span>
         <br></br>
-        <span><b>Ditt namn: </b>${resultState.yourName}</span>
+        <span><b>Ditt namn: </b>${state.yourName}</span>
       `;
 
       const templateParams = {
-        // "to_email": "max.frederiksen@ecsolutions.se",
-        "to_email": "Tommy.Boije@helsingborg.se",
+        "to_email": state.receiverEmailInput,
+        // "to_email": "Tommy.Boije@helsingborg.se",
         "from_name": "Pain Scale App",
         "from_email": "max.frederiksen@ecsolutions.se",
         "reply_to": "max.frederiksen@ecsolutions.se",
-        "to_name": resultState.yourName,
+        "to_name": state.yourName,
         "message_html": messageHtml
       };
 
@@ -103,94 +88,92 @@ const Results = ({ state, settingsHandler }) => {
             spinner: false
           })
         })
-        .catch(error => console.log(error));
+        .catch(error => setState({ error: 'Ett fel inträffade: Vänliged fyll i en giltig e-postadress'}));
     
     }
-    
+
     return (
       <>
         <div className="result">
-        <div className="top-bar">
-          <h1>Resultat</h1>
-          <a href="# " onClick={settingsHandler} className="settings-link"><i className="settings-icon"></i></a>
-        </div>
-        <div className={`settings-box ${state.hideSettingsBox ? 'hidden' : ''}`}>
-          <p>Här kan du välja vem som ska få bedömmningen.</p>
-          <div class="settings-content">
-            <div>
-              <label htmlFor="telephone">Telefon</label>
-              <br></br>
-              <label htmlFor="email">E-postadress</label>
-            </div>
-            <div>
-              <input type="email" name="email"></input>
-              <br></br>
-              <input type="tel" name="telephone"></input>
-            </div>
-          </div>
-          <a href="# " className="close" onClick={settingsHandler}>Klar</a>
-        </div>
-          <i className="word-break"></i>
-          <p>Dina observation tyder på att personens antagna smärtnivå är:</p>
-          <div className="result-content">
-            <div className="result-scale">
-              <span className={`none ${resultIndicator(0, 2)}`}>Ingen (0-2)</span>
-              <span className={`mild ${resultIndicator(3, 7)}`}>Mild (3-7)</span>
-              <span className={`moderate ${resultIndicator(8, 13)}`}>Måttlig (8-13)</span>
-              <span className={`accute ${resultIndicator(14, 18)}`}>Svår (14+)</span>
-              
-              <input className="result-input" type="text" name="result-input" maxLength="2" value={state.painPoints} readOnly></input>
-            </div>
-            
-
-            <form className="result-form" onSubmit={handleSubmit}>
-              <span><b>Typ av smärta</b></span>
-              <br></br>
-              <span>Ange typ av smärta nedan</span>
-              <br></br>
-              <br></br>
-
-              <div className="checkbox-parent">
-                <div className="checkbox-labels">
-                  <label htmlFor="long-lasting">Långvarig</label>
-                  <label htmlFor="long-lasting">Akut</label>
-                  <label htmlFor="long-lasting">Blandad</label>
-                </div>
-                <div className="checkboxes">
-                  <label class="checkbox-container">
-                    <input className="input-checkbox" type="checkbox" name="lasting" checked={resultState.lasting} onChange={handleChange}></input>
-                    <span class="checkmark"></span>
-                  </label>
-                  <label class="checkbox-container">
-                    <input className="input-checkbox" type="checkbox" name="accute" checked={resultState.accute} onChange={handleChange}></input>
-                    <span class="checkmark"></span>
-                  </label>
-                  <label class="checkbox-container">
-                    <input className="input-checkbox" type="checkbox" name="mixed" checked={resultState.mixed} onChange={handleChange}></input>
-                    <span class="checkmark"></span>
-                  </label>
-                </div>
-              </div>
-
-              <label htmlFor="patient-name">Namn på patient / rumsnummer</label>
-              <input className="input-text" type="text" name="patientName" value={resultState.patientName} onChange={handleChange}></input>
-
-              <label htmlFor="your-name">Ditt namn</label>
-              <input className="input-text" type="text" name="yourName" value={resultState.yourName} onChange={handleChange}></input>
-              <div>
-                <Link to="pain-scale" className="previous">&lt; Föregående</Link>
-                <button type="submit" className="link">Skicka</button>
-                <span>
-                  <div class={`spinner ${resultState.spinner ? '' : 'hidden'}`}>
-                    <div class="bounce1"></div>
-                    <div class="bounce2"></div>
-                    <div class="bounce3"></div>
+          <Navigation title={'Resultat'} state={state} settingsHandler={settingsHandler} changeHandler={changeHandler}/>
+          <div className="section">
+            <div className="inner-content">
+                <div className="result-content">
+                  <div className="result-scale">
+                    <h3 className="sub-title">Obeserverad smärtnivå</h3>
+                    <p className="sub-description"><b>Dina observation tyder på att personens antagna smärtnivå är:</b></p>
+                    <div className="indications">
+                      <div>
+                        <span className={`none ${resultIndicator(0, 2)}`}>Ingen</span>
+                        <span className={`mild ${resultIndicator(3, 7)}`}>Mild</span>
+                        <span className={`moderate ${resultIndicator(8, 13)}`}>Måttlig</span>
+                        <span className={`accute ${resultIndicator(14, 18)}`}>Svår</span>
+                      </div>
+                      <div>
+                        <span className={`none ${resultIndicator(0, 2)}`}>0-2</span>
+                        <span className={`mild ${resultIndicator(3, 7)}`}>3-7</span>
+                        <span className={`moderate ${resultIndicator(8, 13)}`}>8-13</span>
+                        <span className={`accute ${resultIndicator(14, 18)}`}>14+</span>
+                      </div>
+                    </div>
+                    
+                    {/* <input className="result-input" type="text" name="result-input" maxLength="2" value={state.painPoints} readOnly></input> */}
                   </div>
-                </span>
-              </div>
-              <span class="sent">{resultState.sent}</span>
-            </form>
+                  
 
+                  <form className="result-form" onSubmit={handleSubmit}>
+                    <h3 className="sub-title">Typ av smärta</h3>
+                    <br></br>
+
+                    <div className="checkboxes">
+                      <div className="checkbox-button">
+                        <label>
+                          <input className={`${state.lasting ? 'active' : ''}`} type="checkbox" name="lasting" checked={state.lasting} onChange={changeHandler}></input><span>Långvarig</span>
+                        </label>
+                      </div>
+                      <div className="checkbox-button">
+                        <label>
+                          <input className={`${state.accute ? 'active' : ''}`} type="checkbox" name="accute" checked={state.accute} onChange={changeHandler}></input><span>Akut</span>
+                        </label>
+                      </div>
+                      <div className="checkbox-button">
+                        <label>
+                          <input className={`${state.mixed ? 'active' : ''}`} type="checkbox" name="mixed" checked={state.mixed} onChange={changeHandler}></input><span>Blandad</span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <label htmlFor="patient-name"><h3 className="sub-title">Patient</h3></label>
+                    <input className="input-text" type="text" name="patientName" value={state.patientName} onChange={changeHandler} placeholder="Namn eller rumsnummer"></input>
+
+                    <label htmlFor="your-name"><h3 className="sub-title">Sjuksköterska / Läkare</h3></label>
+                    <input className="input-text" type="text" name="yourName" value={state.yourName} onChange={changeHandler} placeholder="Ditt namn"></input>
+                    <div>
+                      <div className="bottom-buttons">
+                        <div>
+                          <Link to="pain-scale" className="link previous"><i className="arrow-back"></i> Tillbaka till observationen</Link>
+                        </div>
+                        <div>
+                          <button type="submit" className={`link ${!state.receiverEmailInput ? 'disabled disabled-link' : ''}`}>
+                            <span class={`tooltiptext ${state.receiverEmailInput ? 'hidden' : ''}`}>Email eller telefon måste fyllas i under inställningar.</span>
+                            Skicka bedömmningen
+                          </button>
+                        </div>
+                      </div>
+                      <span>
+                        <div className={`spinner ${resultState.spinner ? '' : 'hidden'}`}>
+                          <div className="bounce1"></div>
+                          <div className="bounce2"></div>
+                          <div className="bounce3"></div>
+                        </div>
+                      </span>
+                    </div>
+                    <span className="sent">{resultState.sent}</span>
+                    <span className="error">{resultState.error}</span>
+                  </form>
+              </div>
+            </div>
+            <img src="./watermark.svg" alt="Watermark logo" className="watermark"></img>
           </div>
         </div>
       </>
