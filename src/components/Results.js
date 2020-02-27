@@ -154,7 +154,7 @@ const Results = ({ state, settingsHandler, changeHandler }) => {
                           <Link to="/assessment" className="link previous"><i className="arrow-back"></i> Tillbaka till observationen</Link>
                         </div>
                         <div>
-                          <button type="submit" className={`link ${!state.receiverEmailInput ? 'disabled disabled-link' : ''}`}>
+                          <button type="submit" disabled={`${!state.receiverEmailInput ? true : false}`} className={`link ${!state.receiverEmailInput ? 'disabled-link' : ''}`}>
                             <span class={`tooltiptext ${state.receiverEmailInput ? 'hidden' : ''}`}>Email eller telefon måste fyllas i under inställningar.</span>
                             Skicka bedömmningen
                           </button>

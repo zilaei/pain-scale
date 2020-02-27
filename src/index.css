@@ -794,6 +794,7 @@ footer {
 .disabled-link {
   opacity: .5;
   background-color:gray;
+  cursor: default;
 }
 
 /* Tooltip text */
