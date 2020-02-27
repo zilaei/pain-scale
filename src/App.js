@@ -143,7 +143,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="page-content">
-          <Router history={history}>
+          <Router history={history} basename="/pain-scale">
             <Route exact path="/" render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler}/>} />
             <Route exact path="/pain-scale" render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler}/>} />
             <Route exact path="/results" render={(props) => <Results {...props} state={this.state} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler} />} />

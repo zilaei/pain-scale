@@ -19,8 +19,8 @@ const Form = ({state, buttonHandler, settingsHandler, changeHandler}) => {
           <div className="card">
             <img className="card-image" src="./scale-faces.png" alt=""></img>
             <div className="card-child">
-              <h3 className="card-title">Bedömning</h3>
-              <p className="card-description"><b>Observera personen och bedöm graden av påverkan med skalan 0 till 3 i punkt 1 till 6 nedan!</b></p>
+              <h3 className="card-title">Hur gör jag?</h3>
+              <p className="card-description">I följande 6 steg, observera personen och ange vad du ser. För steg 2. <b>Ansiktsuttryck</b>, kan du använda bilden ovan som hjälp.</p>
             </div>
           </div>
 
