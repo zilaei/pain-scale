@@ -12,7 +12,7 @@ const Navigation = ({ state, title, settingsHandler, changeHandler }) => {
           <div className="popup-content">
             <div className="popup-top-bar">
               <h3 className="sub-title">Bedömning skickas till...</h3>
-              <a href="# " onClick={settingsHandler} className="close-link"><i className="close"></i></a>
+              <a href="# " onClick={settingsHandler} className="close-link"><i className="close-icon"></i></a>
             </div>
 
             <input className="input-text input-popup" type="email" name="receiverEmailInput" value={state.receiverEmailInput} onChange={changeHandler} placeholder="E-post..."></input>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import history from './history';
 
 import Form from './components/Form';
 import Results from './components/Results';
@@ -21,6 +20,10 @@ class App extends Component {
       lasting: '',
       accute: '',
       mixed: '',
+      sent: '',
+      error: '',
+      spinner: false,
+      redirect: false,
       fields: [
         {
           title: 'Röstuttryck/ljud',
@@ -96,6 +99,85 @@ class App extends Component {
     }
   }
 
+  resultIndicator = (x, y) => {
+    const pP = this.state.painPoints;
+    return pP >= x && pP <= y ? '' : 'inactive';
+  }
+
+  submitHandler = e => {
+    e.preventDefault();
+    e.persist();
+
+    this.setState({
+      spinner: true
+    })
+
+    const messageHtml = `
+      <ul>
+        ${this.state.fields.map((field, i) => {
+          return `<li>
+              <span>${i+1}. ${field.title}: </span>
+              <b>${field.fieldValue}</b>
+            </li>`;
+        }).join('')}
+      </ul>
+
+      <span><b>Total: </b>${this.state.painPoints}</span>
+
+      <br></br>
+
+      <span><b>Smärtnivå: </b></span>
+      ${this.resultIndicator(0,2) === 'inactive' ?  '' : '<span>Ingen (0-2)</span>'}
+      ${this.resultIndicator(3,7) === 'inactive' ?  '' : '<span>Mild (3-7)</span>'}
+      ${this.resultIndicator(8,13) === 'inactive' ?  '' : '<span>Måttlig (8-13)</span>'}
+      ${this.resultIndicator(14,18) === 'inactive' ?  '' : '<span>Svår (14-18)</span>'}
+
+      <br></br>
+      <br></br>
+
+      <span>Typ av smärta</span>
+      <ul>
+        <li>
+          <b>Långvarig: </b>${this.state.lasting ? 'Ja' : 'Nej'}
+        </li>
+        <li>
+          <b>Akut: </b>${this.state.accute ? 'Ja' : 'Nej'}
+        </li>
+        <li>
+          <b>Blandad: </b>${this.state.mixed ? 'Ja' : 'Nej'}
+        </li>
+      </ul>
+
+      <span><b>Namn på patient: </b>${this.state.patientName}</span>
+      <br></br>
+      <span><b>Ditt namn: </b>${this.state.yourName}</span>
+    `;
+
+    const templateParams = {
+      "to_email": this.state.receiverEmailInput,
+      // "to_email": "Tommy.Boije@helsingborg.se",
+      "from_name": "Pain Scale App",
+      "from_email": "max.frederiksen@ecsolutions.se",
+      "reply_to": "max.frederiksen@ecsolutions.se",
+      "to_name": this.state.yourName,
+      "message_html": messageHtml
+    };
+
+    window.emailjs.send('gmail', 'template_BxjtD38x', templateParams)
+      .then(() => {
+        this.setState({
+          sent: 'Bedömning skickad!',
+          spinner: false
+        }, () => {
+          setTimeout(() => {
+            window.location = window.origin + process.env.PUBLIC_URL;
+          }, 1000)
+        })
+      })
+      .catch(error => this.setState({ error: 'Ett fel inträffade: Vänliged fyll i en giltig e-postadress'}));
+  
+  }
+
   infoHandler = e => {
     e.preventDefault();
     e.persist();
@@ -143,10 +225,10 @@ class App extends Component {
     return (
       <div className="App">
         <div className="page-content">
-          <Router history={history} basename={process.env.PUBLIC_URL}>
+          <Router basename={process.env.PUBLIC_URL}>
             <Route exact path="/" render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler}/>} />
             <Route path="/assessment" render={(props) => <Form {...props} state={this.state} buttonHandler={this.buttonHandler} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler}/>} />
-            <Route path="/results" render={(props) => <Results {...props} state={this.state} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler} />} />
+            <Route path="/results" render={(props) => <Results {...props} state={this.state} settingsHandler={this.settingsHandler} changeHandler={this.changeHandler} submitHandler={this.submitHandler} resultIndicator={this.resultIndicator}/>} />
           </Router>
         </div>
       </div>
