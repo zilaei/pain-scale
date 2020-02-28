@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "071a9a51aff16ab087050e251131d9ad",
+    "revision": "e38c72f4b1cc4aa22a0c41e459e806f6",
     "url": "/pain-scale/index.html"
   },
   {
