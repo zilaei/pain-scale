@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/pain-scale/static/css/main.0e3f47aa.chunk.css",
+    "main.css": "/pain-scale/static/css/main.9e2dd246.chunk.css",
     "main.js": "/pain-scale/static/js/main.74da171c.chunk.js",
     "main.js.map": "/pain-scale/static/js/main.74da171c.chunk.js.map",
     "runtime-main.js": "/pain-scale/static/js/runtime-main.290f9725.js",
@@ -8,16 +8,16 @@
     "static/js/2.7c89da2c.chunk.js": "/pain-scale/static/js/2.7c89da2c.chunk.js",
     "static/js/2.7c89da2c.chunk.js.map": "/pain-scale/static/js/2.7c89da2c.chunk.js.map",
     "index.html": "/pain-scale/index.html",
-    "precache-manifest.3db0ce520aaccba0456677988c685242.js": "/pain-scale/precache-manifest.3db0ce520aaccba0456677988c685242.js",
+    "precache-manifest.f09ba91f55bbacd05febfa18c8e6a6f4.js": "/pain-scale/precache-manifest.f09ba91f55bbacd05febfa18c8e6a6f4.js",
     "service-worker.js": "/pain-scale/service-worker.js",
-    "static/css/main.0e3f47aa.chunk.css.map": "/pain-scale/static/css/main.0e3f47aa.chunk.css.map",
+    "static/css/main.9e2dd246.chunk.css.map": "/pain-scale/static/css/main.9e2dd246.chunk.css.map",
     "static/js/2.7c89da2c.chunk.js.LICENSE.txt": "/pain-scale/static/js/2.7c89da2c.chunk.js.LICENSE.txt",
-    "static/media/index.css": "/pain-scale/static/media/settings.54202708.svg"
+    "static/media/index.css": "/pain-scale/static/media/settings.83d38c97.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.290f9725.js",
     "static/js/2.7c89da2c.chunk.js",
-    "static/css/main.0e3f47aa.chunk.css",
+    "static/css/main.9e2dd246.chunk.css",
     "static/js/main.74da171c.chunk.js"
   ]
 }

@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8c83bcca66945cd06dec6474c02e65e1",
+    "revision": "7c5740dcda30ba2d6fc579cbd4c0625e",
     "url": "/pain-scale/index.html"
   },
   {
-    "revision": "379a09a941b09c9ee317",
-    "url": "/pain-scale/static/css/main.0e3f47aa.chunk.css"
+    "revision": "c721018a8696ae406f42",
+    "url": "/pain-scale/static/css/main.9e2dd246.chunk.css"
   },
   {
     "revision": "16e8a62d450f5d642c07",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pain-scale/static/js/2.7c89da2c.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "379a09a941b09c9ee317",
+    "revision": "c721018a8696ae406f42",
     "url": "/pain-scale/static/js/main.74da171c.chunk.js"
   },
   {
@@ -40,7 +40,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pain-scale/static/media/info.b8b94f6d.svg"
   },
   {
-    "revision": "542027087870ea172c36a827849d3419",
-    "url": "/pain-scale/static/media/settings.54202708.svg"
+    "revision": "83d38c97f53f25089780bc641ccd226e",
+    "url": "/pain-scale/static/media/settings.83d38c97.svg"
   }
 ]);
