@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7a23517de1ff287e4dc9b97042465e6d",
+    "revision": "c31c9034778b6ff1691c16a73518cf66",
     "url": "/pain-scale/index.html"
   },
   {
-    "revision": "9d0c880277f790c69920",
+    "revision": "00ee518a2e5e7b21a194",
     "url": "/pain-scale/static/css/main.9a6a0c43.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pain-scale/static/js/2.7ff0f35b.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "9d0c880277f790c69920",
-    "url": "/pain-scale/static/js/main.ee35c2af.chunk.js"
+    "revision": "00ee518a2e5e7b21a194",
+    "url": "/pain-scale/static/js/main.ac17f477.chunk.js"
   },
   {
     "revision": "f9c94da7f798c32f90fe",
